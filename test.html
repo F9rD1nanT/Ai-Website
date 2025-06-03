@@ -1,0 +1,740 @@
+//Данный сайт был создан с помощью AI, этим проектом я хочу показать, что умею создавать сайты не только самостоятельно, но и с помощью AI.
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ремонт компьютера</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --primary-green: #1b8a5a;
+            --dark-green: #146344;
+            --primary-red: #e74c3c;
+            --dark-red: #c0392b;
+            --light-bg: #f8f9fa;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background: linear-gradient(135deg, var(--dark-green), var(--primary-green));
+            color: white;
+            text-align: center;
+            padding: 1.8rem 2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.03) 10px,
+                rgba(255,255,255,0.03) 20px
+            );
+            animation: movePattern 20s linear infinite;
+        }
+        @keyframes movePattern {
+            0% {
+                transform: translate(-50px, -50px);
+            }
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.8rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            font-weight: 800;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        .header-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.2rem;
+        }
+        .header-icon {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            font-size: 1rem;
+        }
+        .header-icon i {
+            font-size: 1.3rem;
+        }
+        .hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1587614382346-4ec70e388b28?ixlib=rb-4.0.3');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
+        .hero-content {
+            max-width: 800px;
+        }
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: var(--dark-green);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .cta-button:hover {
+            background-color: var(--primary-green);
+            transform: translateY(-2px);
+        }
+        .services, .pricing {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .service-card {
+            display: flex;
+            margin-bottom: 2rem;
+            background: var(--light-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            border-left: 4px solid var(--dark-green);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .service-image {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+        }
+        .service-content {
+            padding: 1.5rem;
+            flex: 1;
+        }
+        .service-content h3 {
+            color: var(--dark-green);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+        .service-content p {
+            color: #666;
+            line-height: 1.6;
+        }
+        .price-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Стили для формы обратной связи */
+        .contact-form-section {
+            background: var(--light-bg);
+            padding: 4rem 2rem;
+            margin-top: 4rem;
+        }
+        
+        .contact-form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-top: 4px solid var(--dark-green);
+        }
+        
+        .contact-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .form-group label {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 2px rgba(27, 138, 90, 0.1);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-button {
+            background-color: var(--dark-green);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            width: 100%;
+            font-size: 1.1rem;
+        }
+        
+        .submit-button:hover {
+            background-color: var(--primary-green);
+            transform: translateY(-2px);
+        }
+        
+        .form-required {
+            color: var(--primary-red);
+            margin-left: 4px;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .header-icons {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            
+            .hero {
+                height: 400px;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .contact-form-container {
+                padding: 1.5rem;
+            }
+            
+            .services {
+                grid-template-columns: 1fr;
+            }
+            
+            .price-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .header-icons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero {
+                height: 350px;
+                padding: 1rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.6rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .service-card {
+                grid-template-rows: 150px 1fr;
+            }
+            
+            .contact-form-container {
+                padding: 1rem;
+            }
+            
+            .form-group input,
+            .form-group textarea,
+            .form-group select {
+                padding: 0.6rem;
+            }
+            
+            .submit-button {
+                padding: 0.8rem 1.5rem;
+            }
+        }
+        .price-item {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid var(--dark-green);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .price-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .price-item h3 {
+            color: var(--dark-green);
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .price {
+            color: var(--primary-red);
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0;
+            white-space: nowrap;
+            margin-left: 1rem;
+        }
+        h2 {
+            color: var(--dark-green);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .category-title {
+            margin: 2rem 0 1rem;
+            color: var(--dark-green);
+            text-align: center;
+        }
+        .footer {
+            background: linear-gradient(135deg, var(--dark-green), var(--primary-green));
+            color: white;
+            padding: 3rem 0;
+            margin-top: 4rem;
+            box-shadow: 0 -4px 6px rgba(0,0,0,0.1);
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+        .footer-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .footer-section h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-red);
+        }
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .contact-item:hover {
+            color: var(--primary-red);
+        }
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        .social-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        .social-link:hover {
+            color: var(--primary-red);
+        }
+        .copyright {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>Профессиональный ремонт компьютеров</h1>
+            <p>Быстро, качественно, с гарантией</p>
+            <div class="header-icons">
+                <div class="header-icon">
+                    <i class="fas fa-tools"></i>
+                    <span>Опытные мастера</span>
+                </div>
+                <div class="header-icon">
+                    <i class="fas fa-clock"></i>
+                    <span>Быстрый ремонт</span>
+                </div>
+                <div class="header-icon">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Гарантия качества</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Добро пожаловать в сервис профессионального ремонта</h2>
+            <p>Мы - команда опытных специалистов, которые решат любую проблему с вашей техникой. Доверьте свои устройства профессионалам с многолетним опытом работы. Мы используем только оригинальные запчасти и предоставляем гарантию на все виды работ.</p>
+            <p>✓ Бесплатная диагностика при ремонте<br>
+               ✓ Ремонт в день обращения<br>
+               ✓ Гарантия до 12 месяцев</p>
+            <a href="#" class="cta-button">Узнать стоимость ремонта</a>
+        </div>
+    </section>
+
+    <section class="services">
+        <h2>Наши услуги</h2>
+        
+        <div class="service-card">
+            <img src="https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?ixlib=rb-4.0.3" alt="Диагностика компьютера" class="service-image">
+            <div class="service-content">
+                <h3>Диагностика компьютера</h3>
+                <p>Профессиональная диагностика всех компонентов вашего компьютера. Выявление неисправностей и рекомендации по ремонту. Используем современное диагностическое оборудование для точного определения проблемы.</p>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?ixlib=rb-4.0.3" alt="Ремонт комплектующих" class="service-image">
+            <div class="service-content">
+                <h3>Ремонт комплектующих</h3>
+                <p>Ремонт и замена различных компонентов компьютера: материнской платы, процессора, видеокарты, блока питания и других частей. Работаем с комплектующими любой сложности.</p>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3" alt="Установка ПО" class="service-image">
+            <div class="service-content">
+                <h3>Установка программного обеспечения</h3>
+                <p>Установка операционной системы, драйверов, антивирусов и необходимых программ. Настройка и оптимизация работы ПО для максимальной производительности.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing">
+        <h2>Цены на услуги</h2>
+        <h3 class="category-title">Ремонт компьютеров и ноутбуков</h3>
+        <div class="price-list">
+            <div class="price-item">
+                <h3>Диагностика неисправностей</h3>
+                <p class="price">от 39 €</p>
+            </div>
+            <div class="price-item">
+                <h3>Переустановка Windows с драйверами и программами</h3>
+                <p class="price">от 45 €</p>
+            </div>
+            <div class="price-item">
+                <h3>Чистка системы охлаждения и замена термопасты</h3>
+                <p class="price">от 45 €</p>
+            </div>
+            <div class="price-item">
+                <h3>Замена экрана ноутбука</h3>
+                <p class="price">от 70 €</p>
+            </div>
+            <div class="price-item">
+                <h3>Замена клавиатуры</h3>
+                <p class="price">от 75 €</p>
+            </div>
+            <div class="price-item">
+                <h3>Ремонт материнской платы (пайка)</h3>
+                <p class="price">от 100 €</p>
+            </div>
+            <div class="price-item">
+                <h3>Ремонт разъёма питания</h3>
+                <p class="price">79–99 €</p>
+            </div>
+            <div class="price-item">
+                <h3>Восстановление данных</h3>
+                <p class="price">от 45 €</p>
+            </div>
+            <div class="price-item">
+                <h3>Удаление вирусов</h3>
+                <p class="price">от 45 €</p>
+            </div>
+            <div class="price-item">
+                <h3>Замена блока питания</h3>
+                <p class="price">от 70 €</p>
+            </div>
+            <div class="price-item">
+                <h3>Модернизация ОЗУ или жёсткого диска</h3>
+                <p class="price">от 65 €</p>
+            </div>
+        </div>
+
+        <h3 class="category-title">Ремонт iPhone и смартфонов</h3>
+        <div class="price-list">
+            <div class="price-item">
+                <h3>Замена экрана iPhone</h3>
+                <p class="price">от 60 €</p>
+            </div>
+            <div class="price-item">
+                <h3>Замена аккумулятора iPhone</h3>
+                <p class="price">от 45 €</p>
+            </div>
+            <div class="price-item">
+                <h3>Ремонт разъёма зарядки</h3>
+                <p class="price">от 40 €</p>
+            </div>
+            <div class="price-item">
+                <h3>Ремонт камеры</h3>
+                <p class="price">от 30 €</p>
+            </div>
+            <div class="price-item">
+                <h3>Ремонт после попадания влаги</h3>
+                <p class="price">от 45 €</p>
+            </div>
+            <div class="price-item">
+                <h3>Диагностика устройства</h3>
+                <p class="price">от 20 €</p>
+            </div>
+            <div class="price-item">
+                <h3>Ремонт кнопок (громкости, питания, Home и т. д.)</h3>
+                <p class="price">от 30 €</p>
+            </div>
+            <div class="price-item">
+                <h3>Ремонт/замена микрофона или динамиков</h3>
+                <p class="price">от 30 €</p>
+            </div>
+            <div class="price-item">
+                <h3>Обновление и восстановление ПО (прошивки)</h3>
+                <p class="price">от 40 €</p>
+            </div>
+            <div class="price-item">
+                <h3>Замена стекла без дисплея</h3>
+                <p class="price">от 50 €</p>
+            </div>
+        </div>
+
+        <h3 class="category-title">Ремонт MacBook</h3>
+        <div class="price-list">
+            <div class="price-item">
+                <h3>Ремонт MacBook (замена экрана, батареи, клавиатуры)</h3>
+                <p class="price">от 80 €</p>
+            </div>
+            <div class="price-item">
+                <h3>Замена экрана (дисплея)</h3>
+                <p class="price">от 60 €</p>
+            </div>
+            <div class="price-item">
+                <h3>Замена аккумулятора</h3>
+                <p class="price">от 40 €</p>
+            </div>
+            <div class="price-item">
+                <h3>Восстановление данных</h3>
+                <p class="price">от 50 €</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-form-section">
+        <div class="contact-form-container">
+            <h2>Связаться с нами</h2>
+            <form class="contact-form" action="#" method="POST">
+                <div class="form-group">
+                    <label>Ваше имя<span class="form-required">*</span></label>
+                    <input type="text" name="name" required placeholder="Введите ваше имя">
+                </div>
+                
+                <div class="form-group">
+                    <label>Телефон<span class="form-required">*</span></label>
+                    <input type="tel" name="phone" required placeholder="+371 xxxxxxxx">
+                </div>
+                
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" placeholder="example@domain.com">
+                </div>
+                
+                <div class="form-group">
+                    <label>Тип устройства<span class="form-required">*</span></label>
+                    <select name="device_type" required>
+                        <option value="">Выберите тип устройства</option>
+                        <option value="pc">Компьютер</option>
+                        <option value="laptop">Ноутбук</option>
+                        <option value="macbook">MacBook</option>
+                        <option value="iphone">iPhone</option>
+                        <option value="smartphone">Смартфон (Android)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Опишите проблему<span class="form-required">*</span></label>
+                    <textarea name="problem_description" required placeholder="Опишите, что случилось с вашим устройством"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Предпочтительное время для связи</label>
+                    <select name="preferred_time">
+                        <option value="">Выберите удобное время</option>
+                        <option value="morning">9:00 - 12:00</option>
+                        <option value="afternoon">12:00 - 15:00</option>
+                        <option value="evening">15:00 - 18:00</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="submit-button">Отправить заявку</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Контакты</h3>
+                <div class="contact-info">
+                    <a href="tel:+37120000000" class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        +371 2000-0000
+                    </a>
+                    <a href="mailto:info@computerservice.com" class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        info@computerservice.com
+                    </a>
+                    <a href="https://maps.google.com" target="_blank" class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        ул. Бривибас 200, Рига, LV-1039
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Режим работы</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        Пн-Пт: 9:00 - 18:00
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        Сб: 10:00 - 16:00
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        Вс: Выходной
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Мы в соцсетях</h3>
+                <div class="social-links">
+                    <a href="https://instagram.com" target="_blank" class="social-link">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://tiktok.com" target="_blank" class="social-link">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="https://facebook.com" target="_blank" class="social-link">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" class="social-link">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2024 Ремонт компьютеров. Все права защищены.
+        </div>
+    </footer>
+</body>
+</html>
